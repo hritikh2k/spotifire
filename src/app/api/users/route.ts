@@ -1,18 +1,18 @@
 import { db } from "@/src/db/db";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
+import * as z from "zod"
+
+const userSchema = z.object({
+    username: z.string().min(1, "Username is required").max(100),
+    email: z.string().min(1, "Email is required ").email("Invalid email"),
+    password: z.string().min(1, "Password is required").min(8, "The password must have 8 characters ")
+})
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const { username, email, password } = body;
-
-        if (!emailRegex.test(email)) {
-            return NextResponse.json({
-                message: "Email format is wrong"
-            })
-        }
+        const { username, email, password } = userSchema.parse(body);
 
         const userExistByEmail = await db.user.findUnique({
             where: { email: email }
@@ -51,8 +51,7 @@ export async function POST(req: Request) {
     } catch (error) {
         console.log("error in users ", error);
         return NextResponse.json({
-            error: "error in api/users"
+            error: "error in api/users",
         }, { status: 404 })
     }
-
 }
