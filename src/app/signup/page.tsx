@@ -1,8 +1,8 @@
+import SignupPage from '@/src/components/Signuppage'
 import React from 'react'
 
 const page = () => {
-    return (
-        <div>signuppage</div>
+    return (SignupPage()
     )
 }
 
