@@ -2,6 +2,7 @@ import { db } from "@/src/db/db";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import * as z from "zod"
+import { generateCookie } from "@/src/utils/generateCookie";
 
 const userSchema = z.object({
     username: z.string().min(1, "Username is required").max(10),
@@ -39,13 +40,18 @@ export async function POST(req: Request) {
             }
         })
 
+        // generateCookie({ username: newUser.username, email: newUser.email });
+
         // exclude the password from the response
         const { password: newUserPassword, ...rest } = newUser
 
         return NextResponse.json({
             user: rest,
-            message: "User created successfully"
+            message: "User created successfully",
+            cookie: generateCookie({ username: newUser.username, email: newUser.email })
+
         }, { status: 201 })
+
 
 
     } catch (error) {
