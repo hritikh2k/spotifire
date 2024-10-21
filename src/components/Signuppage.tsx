@@ -1,6 +1,7 @@
 'use client'
 
 import React, { ChangeEvent, useState } from 'react'
+import Link from 'next/link'
 
 const SignupPage = () => {
     const [error, setError] = useState('')
@@ -106,7 +107,9 @@ const SignupPage = () => {
                         Submit
                     </button>
                 </form>
+                <div className='text-center mt-4'>Already have an account?{" "} <Link href="/login" className='hover:underline text-blue-500' >login</Link> </div>
             </div>
+
         </div>
     )
 }

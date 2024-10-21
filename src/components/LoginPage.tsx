@@ -1,5 +1,7 @@
 'use client'
+import Link from 'next/link';
 import React, { ChangeEvent, useState } from 'react';
+Link
 
 const LoginPage = () => {
     const [formdata, setFormdata] = useState({
@@ -94,6 +96,8 @@ const LoginPage = () => {
                         Login
                     </button>
                 </form>
+                <div className='text-center mt-4'>New to Spotifire?{" "} <Link href="/signup" className='hover:underline text-blue-500' >signup</Link> </div>
+
             </div>
         </div>
     );
