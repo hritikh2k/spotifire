@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link';
 import React, { ChangeEvent, useState } from 'react';
-Link
 
 const LoginPage = () => {
     const [formdata, setFormdata] = useState({
