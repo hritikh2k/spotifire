@@ -32,6 +32,7 @@ export async function POST(req: Request) {
 
         const hashPassword = await hash(password, 10);
 
+
         const newUser = await db.user.create({
             data: {
                 username,
@@ -43,10 +44,10 @@ export async function POST(req: Request) {
         // generateCookie({ username: newUser.username, email: newUser.email });
 
         // exclude the password from the response
-        const { password: newUserPassword, ...rest } = newUser
+        // const { password: newUserPassword, ...rest } = newUser
 
         return NextResponse.json({
-            user: rest,
+            user: newUser,
             message: "User created successfully",
             cookie: generateCookie({ username: newUser.username, email: newUser.email })
 

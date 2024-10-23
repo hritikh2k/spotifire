@@ -44,6 +44,7 @@ const LoginPage = () => {
             }
         } catch (error) {
             setError('Network error, please try again later.');
+            console.log(error);
         }
     };
 

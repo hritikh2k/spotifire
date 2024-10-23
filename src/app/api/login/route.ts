@@ -3,8 +3,7 @@ import { generateCookie } from "@/src/utils/generateCookie";
 import { compare } from "bcrypt";
 import { verify } from "jsonwebtoken";
 import { NextResponse } from "next/server";
-import * as z from "zod"
-    ;
+import * as z from "zod";
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY || "your-secret-key";
 
@@ -22,7 +21,8 @@ export async function POST(req: Request) {
                 verify(token, SECRET_KEY);
                 return NextResponse.json({ message: "User already logged in" }, { status: 200 });
             } catch (error) {
-                console.log("Invalid token, proceeding to login");
+                console.log("Invalid token, proceeding to login", error);
+
             }
         }
 
